@@ -80,6 +80,10 @@ body{
 	margin-right:30px;
 }
 /*-- //My Code --*/
+i.excl-tri {
+	color: orange;
+	font-size: 36px;
+}
 .roundedbutton {
     padding: 10px 0;
     width: 36%;
