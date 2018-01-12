@@ -1,3 +1,3 @@
-# electronic-handover
+# Electronic-Handover
 
 University of Bristol Software Product Engineering Project. 
