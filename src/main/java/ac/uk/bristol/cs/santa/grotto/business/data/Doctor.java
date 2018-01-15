@@ -2,6 +2,8 @@ package ac.uk.bristol.cs.santa.grotto.business.data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +45,14 @@ public class Doctor {
 
 
     public Doctor() {
+        teams = new ArrayList<Team>();
+        patients = new ArrayList<Patient>();
+        pendingHandovers = new ArrayList<Handover>();
+        lastRenewed = Date.from(Instant.now());
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -91,6 +101,10 @@ public class Doctor {
 
     public void setPatients(List<Patient> patients) {
         this.patients = patients;
+    }
+
+    public void addPatient(Patient patient) {
+        this.patients.add(patient);
     }
 
     public Date getLastRenewed() {

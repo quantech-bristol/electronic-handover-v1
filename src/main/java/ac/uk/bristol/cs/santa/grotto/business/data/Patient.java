@@ -3,6 +3,7 @@ package ac.uk.bristol.cs.santa.grotto.business.data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -13,9 +14,9 @@ public class Patient {
     @GeneratedValue
     private Long id;
 
-    //Change to Doctor object
     @NotNull
-    private String doctor;
+    @ManyToOne
+    private Doctor doctor;
 
     @NotNull
     private String title;
@@ -71,11 +72,11 @@ public class Patient {
         this.id = id;
     }
 
-    public String getDoctor() {
+    public Doctor getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(String doctor) {
+    public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
 

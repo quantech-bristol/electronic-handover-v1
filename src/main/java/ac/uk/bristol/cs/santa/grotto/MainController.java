@@ -59,14 +59,31 @@ public class MainController extends WebMvcConfigurerAdapter {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private DoctorRepository doctorRepository;
+
 
     @GetMapping("/Quantech")
     public String viewHome(Model model) {
         return "quantech";
     }
 
+    @GetMapping("/addDoctor")
+    public String addDoctor(Model model) {
+        model.addAttribute("doctor", new Doctor());
+        return "addDoctor";
+    }
+
+    @PostMapping("/doctor")
+    public String submitDoctor(@ModelAttribute Doctor doctor) {
+        doctorRepository.save(doctor);
+        return "quantech";
+    }
+
     @GetMapping("/addPatient")
     public String addPatient(Model model) {
+        Iterable<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("doctors",doctors);
         model.addAttribute("patient", new Patient());
         return "addPatient";
     }
@@ -74,6 +91,9 @@ public class MainController extends WebMvcConfigurerAdapter {
     @PostMapping("/patient")
     public String submitPatient(@ModelAttribute Patient patient) {
         patientRepository.save(patient);
+        Doctor doctor = doctorRepository.findOne(patient.getDoctor().getId());
+        doctor.addPatient(patient);
+        doctorRepository.save(doctor);
         return "patientView";
     }
 
